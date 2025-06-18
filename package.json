@@ -6,10 +6,8 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts",
-    "bot": "ts-node src/run-bot.ts",
     "build": "tsc",
-    "watch": "tsc --watch",
-    "test": "ts-node src/test.ts"
+    "watch": "tsc --watch"
   },
   "dependencies": {
     "@privy-io/server-auth": "^1.0.0",

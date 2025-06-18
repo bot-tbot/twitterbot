@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken';
 import { AuthenticatedRequest } from '../middlewares/authenticate';
 import { BadRequestError } from '../controllers/errors';
 
+// Export wallet utilities
+export { WalletGenerator, TransactionHelper } from './wallet';
 
 export const verifySignature = (
   message: string,

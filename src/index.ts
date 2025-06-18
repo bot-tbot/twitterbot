@@ -70,5 +70,6 @@ class App {
 const app = new App();
 app.start().catch((error) => {
   logger.error('Failed to start application:', error);
+   app.stop()
   process.exit(1);
 }); 

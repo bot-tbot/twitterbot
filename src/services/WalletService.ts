@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import { logger } from '../utils/logger';
 import { config } from '../config/nconf';
 import { WalletInfo } from '../types';
-import { WalletGenerator } from '../random';
+import { WalletGenerator } from '../utils/wallet';
 
 export class WalletService {
   private provider: ethers.JsonRpcProvider;
