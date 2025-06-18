@@ -1,0 +1,28 @@
+{
+  "twitter": {
+    "api_key": "y9g8LiSeFmAQ2rxN7L0ejGfzT",
+    "api_secret": "dw7Z1iWWjhMGAs2Hl0NeiOh6PbcMRMiqZZtj54CZ52QneeLDqq",
+    "access_token": "1935309456604266496-OAqApm0hNut9XniRzlAYDndyCixKjG",
+    "access_secret": "gIRuZdfSJOSXnEdTO6BYMMyoSXMVwIONqdZr8TWUN9yUY",
+    "bot_user_id": "1935309456604266496"
+  },
+  "wallet": {
+    "master_seed_phrase": "0xd5d2b4ab4bd34e4d2e9435030845c236a70d4828833ff676f68d1ef6b9fd480d",
+    "rpc_url": "https://base.blockpi.network/v1/rpc/public",
+    "chain_id": 8453
+  },
+  "ollama": {
+    "base_url": "http://localhost:11434",
+    "model": "llama3.2:latest"
+  },
+  "database": {
+    "uri": "mongodb://localhost:27017/twitter-bot"
+  },
+  "server": {
+    "port": 3000,
+    "node_env": "development"
+  },
+  "logging": {
+    "level": "info"
+  }
+}

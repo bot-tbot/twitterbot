@@ -1,0 +1,210 @@
+import { ethers } from "ethers";
+import * as bip39 from "bip39";
+import * as bip32 from "bip32";
+import * as ecc from "tiny-secp256k1";
+
+export class WalletGenerator {
+  private mnemonic: string;
+  private hdRoot: bip32.BIP32Interface;
+  private currentIndex: number;
+  private readonly pathPrefix: string;
+
+  constructor(mnemonic?: string, startIndex = 0, pathPrefix = "m/44'/60'/0'/0/") {
+    this.mnemonic =  bip39.generateMnemonic();
+    const seed = bip39.mnemonicToSeedSync(this.mnemonic);
+    this.hdRoot = bip32.BIP32Factory(ecc).fromSeed(seed);
+    this.currentIndex = startIndex;
+    this.pathPrefix = pathPrefix;
+  }
+
+  public getMnemonic(): string {
+    return this.mnemonic;
+  }
+
+  public generateNextAddress(): { address: string; index: number; path: string; privateKey: string } {
+    const path = `${this.pathPrefix}${this.currentIndex}`;
+    const childNode = this.hdRoot.derivePath(path);
+    const privateKeyBuffer = childNode.privateKey!;
+    const privateKey = Buffer.from(privateKeyBuffer).toString('hex');
+    const wallet = new ethers.Wallet(privateKey);
+    const result = {
+      address: wallet.address,
+      index: this.currentIndex,
+      path: path,
+      privateKey: privateKey
+    };
+    this.currentIndex++;
+    return result;
+  }
+
+  public generateAddressForUser(userId: string): { address: string; index: number; path: string; privateKey: string } {
+    // Create a deterministic index based on user ID
+    const userIndex = this.hashUserId(userId);
+    const path = `${this.pathPrefix}${userIndex}`;
+    const childNode = this.hdRoot.derivePath(path);
+    const privateKeyBuffer = childNode.privateKey!;
+    const privateKey = Buffer.from(privateKeyBuffer).toString('hex');
+    const wallet = new ethers.Wallet(privateKey);
+    
+    return {
+      address: wallet.address,
+      index: userIndex,
+      path: path,
+      privateKey: privateKey
+    };
+  }
+
+  private hashUserId(userId: string): number {
+    // Simple hash function - in production, use a more robust method
+    let hash = 0;
+    for (let i = 0; i < userId.length; i++) {
+      const char = userId.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32-bit integer
+    }
+    return Math.abs(hash);
+  }
+}
+
+// Test function to generate addresses
+export function testWalletGeneration() {
+  console.log("=== Wallet Generation Test ===\n");
+  
+  // Test 1: Generate with random mnemonic
+  console.log("1. Generating wallet with random mnemonic:");
+  const walletGen1 = new WalletGenerator();
+  console.log("Mnemonic:", walletGen1.getMnemonic());
+  
+  for (let i = 0; i < 3; i++) {
+    const wallet = walletGen1.generateNextAddress();
+    console.log(`   Address ${i + 1}: ${wallet.address}`);
+    console.log(`   Path: ${wallet.path}`);
+    console.log(`   Private Key: ${wallet.privateKey.substring(0, 10)}...`);
+    console.log("");
+  }
+  
+  // Test 2: Generate with specific mnemonic
+  console.log("2. Generating wallet with specific mnemonic:");
+  const testMnemonic = "test test test test test test test test test test test junk";
+  const walletGen2 = new WalletGenerator(testMnemonic);
+  console.log("Mnemonic:", walletGen2.getMnemonic());
+  
+  for (let i = 0; i < 3; i++) {
+    const wallet = walletGen2.generateNextAddress();
+    console.log(`   Address ${i + 1}: ${wallet.address}`);
+    console.log(`   Path: ${wallet.path}`);
+    console.log(`   Private Key: ${wallet.privateKey}`);
+    console.log("");
+  }
+  
+  // Test 3: Generate addresses for specific users
+  console.log("3. Generating addresses for specific users:");
+  const walletGen3 = new WalletGenerator();
+  const testUsers = ["user123", "alice", "bob", "charlie"];
+  
+  testUsers.forEach(userId => {
+    const wallet = walletGen3.generateAddressForUser(userId);
+    console.log(`   User: ${userId}`);
+    console.log(`   Address: ${wallet.address}`);
+    console.log(`   Index: ${wallet.index}`);
+    console.log(`   Path: ${wallet.path}`);
+    console.log(`   Private Key: ${wallet.privateKey}`);
+    console.log("");
+  });
+  
+  console.log("=== Test Complete ===");
+}
+
+// Run test if this file is executed directly
+
+//   testWalletGeneration();
+
+// Function to demonstrate transaction capabilities
+export async function demonstrateTransactionCapabilities() {
+  console.log("=== Transaction Capabilities Demo ===\n");
+  
+  // Generate a wallet
+  const walletGen = new WalletGenerator();
+  const walletInfo = walletGen.generateNextAddress();
+  console.log("Generated Wallet:");
+  console.log(`Address: ${walletInfo.address}`);
+  console.log(`Private Key: ${walletInfo.privateKey}`);
+  console.log("");
+  
+  // Create wallet instance for transactions
+  const wallet = new ethers.Wallet(walletInfo.privateKey);
+  
+  // Example 1: Ethereum Mainnet
+//   console.log("1. Ethereum Mainnet Setup:");
+//   const ethereumProvider = new ethers.JsonRpcProvider("https://eth.llamarpc.com");
+//   const ethereumWallet = wallet.connect(ethereumProvider);
+//   console.log(`Connected to Ethereum Mainnet`);
+//   console.log(`Balance: ${await ethereumProvider.getBalance(wallet.address)} wei`);
+//   console.log("");
+  
+  // Example 2: Polygon (Matic)
+  console.log("2. Polygon Network Setup:");
+  const polygonProvider = new ethers.JsonRpcProvider("https://polygon-rpc.com");
+  const polygonWallet = wallet.connect(polygonProvider);
+  console.log(`Connected to Polygon Network`);
+  console.log(`Balance: ${await polygonProvider.getBalance(wallet.address)} wei`);
+  console.log("");
+  
+  // Example 3: BSC (Binance Smart Chain)
+  console.log("3. BSC Network Setup:");
+  const bscProvider = new ethers.JsonRpcProvider("https://bsc-dataseed.binance.org");
+  const bscWallet = wallet.connect(bscProvider);
+  console.log(`Connected to BSC Network`);
+  console.log(`Balance: ${await bscProvider.getBalance(wallet.address)} wei`);
+  console.log("");
+  
+  // Example transaction (commented out for safety)
+  console.log("4. Example Transaction (commented out for safety):");
+  console.log("// To send a transaction:");
+  console.log("// const tx = await wallet.sendTransaction({");
+  console.log("//   to: '0x...', // recipient address");
+  console.log("//   value: ethers.parseEther('0.001') // amount in ETH");
+  console.log("// });");
+  console.log("// await tx.wait(); // wait for confirmation");
+  console.log("");
+  
+  console.log("=== Transaction Demo Complete ===");
+}
+
+// Function to create a transaction helper
+export class TransactionHelper {
+  private wallet: ethers.Wallet;
+  private provider: ethers.Provider;
+  
+  constructor(privateKey: string, rpcUrl: string) {
+    this.provider = new ethers.JsonRpcProvider(rpcUrl);
+    this.wallet = new ethers.Wallet(privateKey, this.provider);
+  }
+  
+  async getBalance(): Promise<string> {
+    const balance = await this.provider.getBalance(this.wallet.address);
+    return ethers.formatEther(balance);
+  }
+  
+  async sendTransaction(to: string, amount: string): Promise<string> {
+    const tx = await this.wallet.sendTransaction({
+      to: to,
+      value: ethers.parseEther(amount)
+    });
+    
+    console.log(`Transaction sent: ${tx.hash}`);
+    const receipt = await tx.wait();
+    console.log(`Transaction confirmed in block: ${receipt?.blockNumber}`);
+    
+    return tx.hash;
+  }
+  
+  async getTransactionHistory(): Promise<any[]> {
+    // This would require additional API calls to get transaction history
+    // Implementation depends on the specific blockchain explorer API
+    console.log("Transaction history requires blockchain explorer API integration");
+    return [];
+  }
+}
+
+// demonstrateTransactionCapabilities()
