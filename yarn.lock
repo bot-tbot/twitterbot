@@ -420,10 +420,10 @@
   dependencies:
     zod "^3.24.3"
 
-"@privy-io/public-api@2.33.2":
-  version "2.33.2"
-  resolved "https://registry.npmjs.org/@privy-io/public-api/-/public-api-2.33.2.tgz"
-  integrity sha512-TpNzZ5pk2g4kUNErV7FgM2FAQ2bDvKF43Gtspo1+dOvoc9faK1Frs7brr7ZFhVinkMRZAQGkEdiHQt7fzOQTFg==
+"@privy-io/public-api@2.34.0":
+  version "2.34.0"
+  resolved "https://registry.npmjs.org/@privy-io/public-api/-/public-api-2.34.0.tgz"
+  integrity sha512-QK7HZVvvOe6xEEocXiATIiOkwcYzbl6aaIcZXkfMGbNpszWZUsBki5s3meHBhCAby9PobbKs0/ltNFLKBp5vSQ==
   dependencies:
     "@privy-io/api-base" "1.5.1"
     bs58 "^5.0.0"
@@ -432,15 +432,14 @@
     zod "^3.24.3"
 
 "@privy-io/server-auth@^1.0.0":
-  version "1.27.1"
-  resolved "https://registry.npmjs.org/@privy-io/server-auth/-/server-auth-1.27.1.tgz"
-  integrity sha512-LLjCS3t22HSlgjTTQ4U6F6RiS4c/o+iYwyrAkPZtAr2INaajgTpHJblTiPuY7vqmzrpBIoQSi5UXIIcA+OX1Gw==
+  version "1.27.2"
+  integrity sha512-w9banRMMB4CDp90FptRmrtTHvB6xYEOmmK57M1MOr0gp5K+6r8aX1OYROZpVUQ1gV9bvpAoRV5RCWf8YVQD+pw==
   dependencies:
     "@hpke/chacha20poly1305" "^1.6.2"
     "@hpke/core" "^1.7.2"
     "@noble/curves" "^1.6.0"
     "@noble/hashes" "^1.5.0"
-    "@privy-io/public-api" "2.33.2"
+    "@privy-io/public-api" "2.34.0"
     "@solana/web3.js" "^1.95.8"
     canonicalize "^2.0.0"
     dotenv "^16.0.3"
@@ -1077,11 +1076,6 @@ clone@2.x:
   resolved "https://registry.npmjs.org/clone/-/clone-2.1.2.tgz"
   integrity sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w==
 
-coffee-script@*:
-  version "1.12.7"
-  resolved "https://registry.npmjs.org/coffee-script/-/coffee-script-1.12.7.tgz"
-  integrity sha512-fLeEhqwymYat/MpTPUjSKHVYYl0ec2mOyALEMLmzr5i1isuG+6jfI2j2d5oBO3VIzgUXgBVIcOT9uH1TFxBckw==
-
 color-convert@^1.9.3:
   version "1.9.3"
   resolved "https://registry.npmjs.org/color-convert/-/color-convert-1.9.3.tgz"
@@ -1173,11 +1167,6 @@ create-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.npmjs.org/create-require/-/create-require-1.1.1.tgz"
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
-
-crypto@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/crypto/-/crypto-1.0.1.tgz"
-  integrity sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==
 
 debug@^4.3.5, debug@^4.4.0, debug@4.x:
   version "4.4.1"
@@ -1376,11 +1365,6 @@ fecha@^4.2.0:
   version "4.2.3"
   resolved "https://registry.npmjs.org/fecha/-/fecha-4.2.3.tgz"
   integrity sha512-OP2IUU6HeYKJi3i0z4A19kHMQoLVs4Hc+DPqqxI2h/DPZHTm/vjsfC6P0b4jCMy14XizLBqvndQ+UilD7707Jw==
-
-file@*:
-  version "0.2.2"
-  resolved "https://registry.npmjs.org/file/-/file-0.2.2.tgz"
-  integrity sha512-gwabMtChzdnpDJdPEpz8Vr/PX0pU85KailuPV71Zw/un5yJVKvzukhB3qf6O3lnTwIe5CxlMYLh3jOK3w5xrLA==
 
 finalhandler@^2.1.0:
   version "2.1.0"
@@ -1811,10 +1795,10 @@ ms@^2.0.0, ms@^2.1.1, ms@^2.1.3, ms@2.1.3:
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
-nconf@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.npmjs.org/nconf/-/nconf-0.13.0.tgz"
-  integrity sha512-hJ/u2xCpA663h6xyOiztx3y+lg9eU0rdkwJ+c4FtiHo2g/gB0sjXtW31yTdMLWLOIj1gL2FcJMwfOqouuUK/Wg==
+nconf@^0.12.0:
+  version "0.12.1"
+  resolved "https://registry.npmjs.org/nconf/-/nconf-0.12.1.tgz"
+  integrity sha512-p2cfF+B3XXacQdswUYWZ0w6Vld0832A/tuqjLBu3H1sfUcby4N2oVbGhyuCkZv+t3iY3aiFEj7gZGqax9Q2c1w==
   dependencies:
     async "^3.0.0"
     ini "^2.0.0"
@@ -1923,9 +1907,9 @@ pg-int8@1.0.1:
   integrity sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==
 
 pg-protocol@*:
-  version "1.10.0"
-  resolved "https://registry.npmjs.org/pg-protocol/-/pg-protocol-1.10.0.tgz"
-  integrity sha512-IpdytjudNuLv8nhlHs/UrVBhU0e78J0oIS/0AVdTbWxSOkFUVdsHC/NrorO6nXsQNDTT1kzDSOMJubBQviX18Q==
+  version "1.10.1"
+  resolved "https://registry.npmjs.org/pg-protocol/-/pg-protocol-1.10.1.tgz"
+  integrity sha512-9YS3ZonDj0Lxny//aF0ITPdfrEPgKWCJvONsSXAaIUhgpzlzl5JgaZNlbTFxvYNfm2terGEnHeOSUlF6qRGBzw==
 
 pg-types@^2.2.0:
   version "2.2.0"
@@ -2115,15 +2099,6 @@ send@^1.1.0, send@^1.2.0:
     on-finished "^2.4.1"
     range-parser "^1.2.1"
     statuses "^2.0.1"
-
-sentry@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/sentry/-/sentry-0.1.2.tgz"
-  integrity sha512-WVMYvjMCqdMwfins7AkwBhCINvw0EfXj0Aeo/YUQYyD6VOhAQPDM7uxnPDBzd2N50NR8w+yb3irHxSbd9Wy9OQ==
-  dependencies:
-    coffee-script "*"
-    file "*"
-    underscore "*"
 
 serve-static@^2.2.0:
   version "2.2.0"
@@ -2390,11 +2365,6 @@ uint8array-tools@0.0.7:
   version "0.0.7"
   resolved "https://registry.npmjs.org/uint8array-tools/-/uint8array-tools-0.0.7.tgz"
   integrity sha512-vrrNZJiusLWoFWBqz5Y5KMCgP9W9hnjZHzZiZRT8oNAkq3d5Z5Oe76jAvVVSRh4U8GGR90N2X1dWtrhvx6L8UQ==
-
-underscore@*:
-  version "1.13.7"
-  resolved "https://registry.npmjs.org/underscore/-/underscore-1.13.7.tgz"
-  integrity sha512-GMXzWtsc57XAtguZgaQViUOzs0KTkk8ojr3/xAxXLITqf/3EMwxC0inyETfDFjH/Krbhuep0HNbbjI9i/q3F3g==
 
 undici-types@~6.19.2:
   version "6.19.8"
